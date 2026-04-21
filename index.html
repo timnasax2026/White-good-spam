@@ -4,67 +4,227 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WHITE GOOD BAN CHECK 🧌🦠</title>
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --red: #ff0000;
+            --green: #00ff41;
+            --dark: #050000;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+
         body {
-            background: #000 url('https://wallpaperaccess.com/full/1231613.jpg') no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Segoe UI', sans-serif;
-            color: white;
+            background: var(--dark);
+            color: var(--green);
+            font-family: 'Courier Prime', monospace;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            min-height: 100vh;
             overflow: hidden;
         }
-        .overlay {
-            position: absolute;
+
+        /* Matrix Background Effect */
+        #matrix {
+            position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1;
+            opacity: 0.15;
+            z-index: -1;
         }
-        .card {
-            position: relative;
+
+        .main-container {
+            width: 90%;
+            max-width: 450px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid var(--red);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 30px var(--red);
             z-index: 10;
-            background: rgba(20, 0, 0, 0.9);
-            border: 2px solid #ff0000;
-            padding: 30px;
-            border-radius: 15px;
+        }
+
+        h1 {
+            font-family: 'Creepster', cursive;
+            color: var(--red);
+            font-size: 2rem;
             text-align: center;
-            width: 350px;
-            box-shadow: 0 0 20px #ff0000;
+            text-shadow: 0 0 10px var(--red);
+            margin-bottom: 15px;
         }
-        h1 { font-family: 'Creepster', cursive; color: #ff0000; font-size: 2rem; }
-        img { width: 150px; border-radius: 50%; border: 3px solid #ff0000; margin: 15px 0; }
-        input, select {
-            width: 100%; padding: 10px; margin: 10px 0;
-            background: #111; border: 1px solid #ff0000; color: #00ff00;
+
+        .avatar-box img {
+            width: 120px;
+            border-radius: 50%;
+            border: 2px solid var(--red);
+            display: block;
+            margin: 0 auto 15px;
+            filter: grayscale(1) contrast(1.5);
         }
-        button {
-            width: 100%; padding: 15px; background: #8b0000; color: white;
-            font-weight: bold; border: none; cursor: pointer; text-transform: uppercase;
+
+        /* Terminal Style */
+        #terminal {
+            background: #000;
+            border: 1px solid #333;
+            height: 200px;
+            overflow-y: hidden;
+            padding: 10px;
+            font-size: 0.75rem;
+            margin: 15px 0;
+            color: var(--green);
+            display: none; /* Hide until button clicked */
         }
-        button:hover { background: red; box-shadow: 0 0 10px red; }
+
+        .input-group { margin-bottom: 10px; }
+        label { font-size: 0.7rem; text-transform: uppercase; color: var(--red); }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            background: #111;
+            border: 1px solid #444;
+            color: var(--green);
+            outline: none;
+            margin-top: 5px;
+        }
+
+        .btn-check {
+            width: 100%;
+            padding: 15px;
+            background: var(--red);
+            color: white;
+            border: none;
+            font-weight: bold;
+            font-family: 'Creepster', cursive;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-check:hover { background: #b30000; letter-spacing: 2px; }
+
+        .scan-line {
+            color: var(--green);
+            margin-bottom: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid var(--green);
+            animation: typing 2s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--green); } }
     </style>
 </head>
 <body>
-    <div class="overlay"></div>
-    <div class="card">
-        <h1>WHITE GOOD BAN CHECK 🧌🦠</h1>
-        <img src="https://telegra.ph/file/07f7c4613c233157f49a2.jpg" alt="Jiren">
-        <select id="country">
-            <option value="255">Tanzania (+255)</option>
-            <option value="254">Kenya (+254)</option>
-        </select>
-        <input type="number" id="phone" placeholder="Enter number...">
-        <button onclick="check()">EXECUTE BAN CHECK 💀</button>
+
+    <canvas id="matrix"></canvas>
+
+    <div class="main-container" id="form-box">
+        <h1>HELL SYSTEM BYPASS 🧌</h1>
+        <div class="avatar-box">
+            <img src="https://telegra.ph/file/07f7c4613c233157f49a2.jpg" alt="Guardian">
+        </div>
+
+        <div id="terminal"></div>
+
+        <div id="inputs">
+            <div class="input-group">
+                <label>Region Origin</label>
+                <select id="country">
+                    <option value="255">Tanzania (+255)</option>
+                    <option value="243">DRC (+243)</option>
+                    <option value="254">Kenya (+254)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Victim Number</label>
+                <input type="number" id="phone" placeholder="Enter target number...">
+            </div>
+
+            <button class="btn-check" onclick="startHack()">EXECUTE BAN HACK ☠️</button>
+        </div>
     </div>
+
     <script>
-        function check() {
-            const n = document.getElementById('phone').value;
-            if(!n) return alert("Enter number! ☠️");
-            alert("SYSTEM SCANNING " + n + "... STICK AROUND!");
+        // Matrix Background Logic
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+        const characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ$#@&%*";
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#0F0";
+            ctx.font = fontSize + "px monospace";
+            for(let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 35);
+
+        // Hacking Simulation Logic
+        function startHack() {
+            const num = document.getElementById('phone').value;
+            if(!num) return alert("NO TARGET SPECIFIED! ☠️");
+
+            document.getElementById('inputs').style.display = 'none';
+            const term = document.getElementById('terminal');
+            term.style.display = 'block';
+
+            const logs = [
+                "> INITIALIZING WHITE GOOD EXPLOIT...",
+                "> BYPASSING WHATSAPP ENCRYPTION...",
+                "> CONNECTING TO GLOBAL PROXY [192.168.0.1]...",
+                "> TARGETING: " + num,
+                "> RETRIEVING IP ADDRESS: 41.212.112.54",
+                "> EXTRACTING CONTACT DETAILS...",
+                "> STATUS: SCANNING BAN DATABASE...",
+                "> INJECTING PAYLOAD TO SYSTEM...",
+                "> SUCCESS! GENERATING REPORT..."
+            ];
+
+            let i = 0;
+            const interval = setInterval(() => {
+                if(i < logs.length) {
+                    const p = document.createElement('div');
+                    p.className = 'scan-line';
+                    p.innerHTML = logs[i];
+                    term.appendChild(p);
+                    term.scrollTop = term.scrollHeight;
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    showFinalResult(num);
+                }
+            }, 800);
+        }
+
+        function showFinalResult(num) {
+            const result = `
+                -----------------------------
+                ☠️ SYSTEM REPORT ☠️
+                -----------------------------
+                TARGET: ${num}
+                BAN STATUS: PERMANENTLY DAMNED (BANNED) 🦠
+                LOCATION: TUNDUMA, TZ
+                NETWORK: VODACOM/AIRTEL
+                DEBT STATUS: CRITICAL
+                IP ADDR: 102.16.4.55
+                -----------------------------
+                YOU ARE NOW BEING WATCHED! 🧌🩸
+            `;
+            alert(result);
+            location.reload();
         }
     </script>
 </body>
