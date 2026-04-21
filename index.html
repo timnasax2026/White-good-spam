@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WHITE GOOD EXPLOIT 🧌🦠</title>
+    <title>BUGMEN VIRUS INJECTOR 🧌🦠</title>
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Courier+Prime&display=swap" rel="stylesheet">
     <style>
-        :root { --neon: #00ff41; --blood: #ff0000; --dark: #000; }
+        :root { --neon: #00ff41; --blood: #ff0000; --dark: #050000; }
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
         
         body {
@@ -20,64 +20,60 @@
             overflow: hidden;
         }
 
-        canvas { position: fixed; top: 0; left: 0; z-index: -1; }
+        canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
 
         .hack-box {
             width: 95%;
             max-width: 450px;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             border: 2px solid var(--blood);
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 0 50px var(--blood);
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
             text-align: center;
             z-index: 10;
         }
 
-        h1 { font-family: 'Creepster', cursive; color: var(--blood); font-size: 2.5rem; margin-bottom: 10px; }
+        h1 { font-family: 'Creepster', cursive; color: var(--blood); font-size: 2.3rem; margin-bottom: 5px; text-shadow: 0 0 10px red; }
 
-        /* Nchi Zote Input */
-        .input-row {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin: 20px 0;
-        }
+        .input-group { display: flex; flex-direction: column; gap: 12px; margin: 15px 0; text-align: left; }
+        
+        label { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
 
         select, input {
-            background: #111;
+            background: #000;
             border: 1px solid var(--blood);
             color: var(--neon);
-            padding: 15px;
-            font-size: 1.1rem;
+            padding: 12px;
+            font-size: 1rem;
             outline: none;
             border-radius: 5px;
         }
 
-        .btn-hack {
+        .btn-attack {
             background: var(--blood);
             color: #fff;
             padding: 18px;
             border: none;
             width: 100%;
             font-family: 'Creepster', cursive;
-            font-size: 1.5rem;
-            letter-spacing: 3px;
+            font-size: 1.6rem;
             cursor: pointer;
             transition: 0.3s;
+            margin-top: 10px;
         }
 
-        .btn-hack:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--blood); }
+        .btn-attack:hover { transform: scale(1.02); background: #ff3333; box-shadow: 0 0 20px red; }
 
-        /* Counter na Loader */
-        #loading-screen { display: none; }
-        .counter { font-size: 3rem; color: var(--blood); margin: 20px 0; }
-        .status-text { font-size: 0.8rem; color: #888; text-transform: uppercase; }
+        /* Loader */
+        #loader-ui { display: none; }
+        .counter { font-size: 4rem; color: var(--blood); font-weight: bold; margin: 15px 0; }
+        .log-stream { font-size: 0.75rem; color: #aaa; height: 50px; overflow: hidden; }
 
-        /* Result Section */
-        #result { display: none; text-align: left; background: #080000; padding: 15px; border-left: 5px solid var(--blood); }
-        .details { color: #fff; font-size: 0.9rem; margin-top: 10px; }
-        .virus-alert { color: var(--blood); font-weight: bold; animation: blink 0.5s infinite; }
+        /* Final Result */
+        #result-ui { display: none; }
+        .details { text-align: left; background: #110000; padding: 15px; border: 1px dashed var(--blood); margin: 15px 0; font-size: 0.8rem; line-height: 1.5; }
+        .warning { color: var(--blood); font-weight: bold; animation: blink 0.2s infinite; font-size: 1.1rem; }
 
         @keyframes blink { 0% { opacity: 0; } 100% { opacity: 1; } }
     </style>
@@ -86,114 +82,112 @@
 
 <canvas id="matrix"></canvas>
 
-<div class="hack-box" id="main-ui">
-    <h1>WHITE GOOD BYPASS 🧌</h1>
-    <p style="font-size: 0.7rem;">DECRYPTING WORLDWIDE SERVERS...</p>
+<div class="hack-box" id="setup-ui">
+    <h1>BUGMEN INJECTOR 🧌</h1>
+    <p style="font-size: 0.6rem; color: #666;">TIMNASA TMD - SYSTEM OVERRIDE</p>
     
-    <div class="input-row">
-        <select id="country-code">
-            <option value="255">Tanzania (+255)</option>
-            <option value="254">Kenya (+254)</option>
-            <option value="256">Uganda (+256)</option>
-            <option value="243">DRC (+243)</option>
-            <option value="1">USA (+1)</option>
-            <option value="44">UK (+44)</option>
-            <option value="27">South Africa (+27)</option>
-            <option value="234">Nigeria (+234)</option>
-            </select>
-        <input type="number" id="target-number" placeholder="Enter Victim's Number">
+    <div class="input-group">
+        <label>1. Select Payload Type</label>
+        <select id="virus-type">
+            <option value="Trojan.Bugmen">Trojan.Bugmen 🪳</option>
+            <option value="WhatsApp.Crasher">WhatsApp.Crasher 💥</option>
+            <option value="Data.Siphoner">Data.Siphoner 🕵️</option>
+            <option value="Battery.Drainer">Battery.Drainer 🔋</option>
+        </select>
+
+        <label>2. Target Identity (Number)</label>
+        <input type="number" id="target" placeholder="e.g 255712345678">
+
+        <label>3. Attack Intensity (0% - 100%)</label>
+        <input type="number" id="intensity" placeholder="Set attack limit %" min="1" max="100" value="100">
     </div>
 
-    <button class="btn-hack" onclick="startInfection()">SEND VIRUS 🦠</button>
+    <button class="btn-attack" onclick="launchAttack()">LAUNCH BUGMEN 🦠</button>
 </div>
 
-<div class="hack-box" id="loading-screen">
-    <h1>INJECTING MALWARE...</h1>
-    <div class="counter" id="percent">0%</div>
-    <div class="status-text" id="status-log">Accessing WhatsApp Root...</div>
+<div class="hack-box" id="loader-ui">
+    <h1 id="load-title">ATTACKING...</h1>
+    <div class="counter" id="count-text">0%</div>
+    <div class="log-stream" id="logs">Initializing Bugmen protocol...</div>
 </div>
 
-<div class="hack-box" id="result-ui" style="display: none;">
-    <h1 style="font-size: 1.5rem;">VICTIM COMPROMISED! 💀</h1>
-    <div id="result"></div>
-    <p class="virus-alert">☣️ VIRUS SUCCESSFULLY SENT TO TARGET ☣️</p>
-    <button class="btn-hack" style="margin-top: 20px; font-size: 1rem;" onclick="location.reload()">TARGET NEW SOUL</button>
+<div class="hack-box" id="result-ui">
+    <h1 style="font-size: 1.5rem;">VICTIM BREACHED 💀</h1>
+    <div class="details" id="final-stats"></div>
+    <p class="warning">⚠️ TARGET DEVICE INFECTED ⚠️</p>
+    <button class="btn-attack" style="font-size: 1rem;" onclick="location.reload()">NEXT TARGET</button>
 </div>
 
 <script>
-    // Matrix background
+    // Matrix Background
     const canvas = document.getElementById('matrix');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    const chars = "0101010101ERROR666VIRUSDEATH";
+    const chars = "BUGMEN0101666ERROR";
     const drops = Array(Math.floor(canvas.width/20)).fill(1);
 
     function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "rgba(0,0,0,0.1)";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
         ctx.fillStyle = "#0F0";
         drops.forEach((y, i) => {
-            const text = chars[Math.floor(Math.random() * chars.length)];
-            ctx.fillText(text, i * 20, y * 20);
-            if (y * 20 > canvas.height && Math.random() > 0.98) drops[i] = 0;
+            const text = chars[Math.floor(Math.random()*chars.length)];
+            ctx.fillText(text, i*20, y*20);
+            if(y*20 > canvas.height && Math.random() > 0.98) drops[i] = 0;
             drops[i]++;
         });
     }
     setInterval(draw, 40);
 
-    // Hacking Logic
-    function startInfection() {
-        const num = document.getElementById('target-number').value;
-        if(!num) return alert("WHO IS THE VICTIM? 🧌");
+    // Hacking Simulation
+    function launchAttack() {
+        const target = document.getElementById('target').value;
+        const limit = parseInt(document.getElementById('intensity').value);
+        const vType = document.getElementById('virus-type').value;
 
-        document.getElementById('main-ui').style.display = 'none';
-        document.getElementById('loading-screen').style.display = 'block';
+        if(!target || isNaN(limit)) return alert("CONFIG ERROR: MISSING TARGET! 🧌");
 
-        let count = 0;
-        const statusLogs = [
-            "Bypassing Firebase Auth...",
-            "Decrypting Media Keys...",
-            "Extracting Profile Buffer...",
-            "Locating GPS Coordinates...",
-            "Infecting Device: TIMNASA-TMD...",
-            "Uploading Trojan.exe..."
+        document.getElementById('setup-ui').style.display = 'none';
+        document.getElementById('loader-ui').style.display = 'block';
+
+        let progress = 0;
+        const msg = [
+            `Sending ${vType} packets...`,
+            "Bypassing End-to-End Encryption...",
+            "Accessing Camera & Mic...",
+            "Extracting TMD Backup files...",
+            "Infecting System Root..."
         ];
 
         const timer = setInterval(() => {
-            count += Math.floor(Math.random() * 5) + 1;
-            if(count > 100) count = 100;
-            
-            document.getElementById('percent').innerText = count + "%";
-            document.getElementById('status-log').innerText = statusLogs[Math.floor(Math.random() * statusLogs.length)];
-
-            if(count === 100) {
+            progress += Math.floor(Math.random()*2) + 1;
+            if(progress >= limit) {
+                progress = limit;
                 clearInterval(timer);
-                showFinal();
+                setTimeout(finish, 800);
             }
-        }, 150);
+            document.getElementById('count-text').innerText = progress + "%";
+            document.getElementById('logs').innerText = msg[Math.floor(Math.random()*msg.length)];
+        }, 50);
     }
 
-    function showFinal() {
-        const num = document.getElementById('target-number').value;
-        const code = document.getElementById('country-code').value;
-        document.getElementById('loading-screen').style.display = 'none';
+    function finish() {
+        const target = document.getElementById('target').value;
+        const vType = document.getElementById('virus-type').value;
+        const limit = document.getElementById('intensity').value;
+
+        document.getElementById('loader-ui').style.display = 'none';
         document.getElementById('result-ui').style.display = 'block';
-        
-        const resDiv = document.getElementById('result');
-        resDiv.style.display = 'block';
-        resDiv.innerHTML = `
-            <div class="details">
-                <strong>NAME:</strong> Unknown Subject<br>
-                <strong>WHATSAPP ID:</strong> ${code}${num}@s.whatsapp.net<br>
-                <strong>STATUS:</strong> BANNED FROM LIFE<br>
-                <strong>IP:</strong> 102.44.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}<br>
-                <strong>LOCATION:</strong> DAR ES SALAAM, TZ<br>
-                <strong>LAST SEEN:</strong> CRYING 🧛
-            </div>
+
+        document.getElementById('final-stats').innerHTML = `
+            <strong>VIRUS TYPE:</strong> ${vType}<br>
+            <strong>TARGET ID:</strong> +${target}<br>
+            <strong>ATTACK LIMIT:</strong> ${limit}% REACHED<br>
+            <strong>IP ORIGIN:</strong> 102.16.${Math.floor(Math.random()*255)}.1<br>
+            <strong>STATUS:</strong> DAMNED BY BUGMEN 🪳
         `;
     }
 </script>
-
 </body>
 </html>
