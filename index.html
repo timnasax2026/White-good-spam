@@ -3,229 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WHITE GOOD BAN CHECK 🧌🦠</title>
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <title>WHITE GOOD EXPLOIT 🧌🦠</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Courier+Prime&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --red: #ff0000;
-            --green: #00ff41;
-            --dark: #050000;
-        }
-
+        :root { --neon: #00ff41; --blood: #ff0000; --dark: #000; }
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
-
+        
         body {
             background: var(--dark);
-            color: var(--green);
+            color: var(--neon);
             font-family: 'Courier Prime', monospace;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             overflow: hidden;
         }
 
-        /* Matrix Background Effect */
-        #matrix {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0.15;
-            z-index: -1;
-        }
+        canvas { position: fixed; top: 0; left: 0; z-index: -1; }
 
-        .main-container {
-            width: 90%;
+        .hack-box {
+            width: 95%;
             max-width: 450px;
             background: rgba(0, 0, 0, 0.9);
-            border: 2px solid var(--red);
+            border: 2px solid var(--blood);
             border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 30px var(--red);
+            padding: 25px;
+            box-shadow: 0 0 50px var(--blood);
+            text-align: center;
             z-index: 10;
         }
 
-        h1 {
-            font-family: 'Creepster', cursive;
-            color: var(--red);
-            font-size: 2rem;
-            text-align: center;
-            text-shadow: 0 0 10px var(--red);
-            margin-bottom: 15px;
-        }
+        h1 { font-family: 'Creepster', cursive; color: var(--blood); font-size: 2.5rem; margin-bottom: 10px; }
 
-        .avatar-box img {
-            width: 120px;
-            border-radius: 50%;
-            border: 2px solid var(--red);
-            display: block;
-            margin: 0 auto 15px;
-            filter: grayscale(1) contrast(1.5);
+        /* Nchi Zote Input */
+        .input-row {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
         }
-
-        /* Terminal Style */
-        #terminal {
-            background: #000;
-            border: 1px solid #333;
-            height: 200px;
-            overflow-y: hidden;
-            padding: 10px;
-            font-size: 0.75rem;
-            margin: 15px 0;
-            color: var(--green);
-            display: none; /* Hide until button clicked */
-        }
-
-        .input-group { margin-bottom: 10px; }
-        label { font-size: 0.7rem; text-transform: uppercase; color: var(--red); }
 
         select, input {
-            width: 100%;
-            padding: 10px;
             background: #111;
-            border: 1px solid #444;
-            color: var(--green);
+            border: 1px solid var(--blood);
+            color: var(--neon);
+            padding: 15px;
+            font-size: 1.1rem;
             outline: none;
-            margin-top: 5px;
+            border-radius: 5px;
         }
 
-        .btn-check {
-            width: 100%;
-            padding: 15px;
-            background: var(--red);
-            color: white;
+        .btn-hack {
+            background: var(--blood);
+            color: #fff;
+            padding: 18px;
             border: none;
-            font-weight: bold;
+            width: 100%;
             font-family: 'Creepster', cursive;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            letter-spacing: 3px;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        .btn-check:hover { background: #b30000; letter-spacing: 2px; }
+        .btn-hack:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--blood); }
 
-        .scan-line {
-            color: var(--green);
-            margin-bottom: 3px;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 2px solid var(--green);
-            animation: typing 2s steps(40, end), blink-caret .75s step-end infinite;
-        }
+        /* Counter na Loader */
+        #loading-screen { display: none; }
+        .counter { font-size: 3rem; color: var(--blood); margin: 20px 0; }
+        .status-text { font-size: 0.8rem; color: #888; text-transform: uppercase; }
 
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--green); } }
+        /* Result Section */
+        #result { display: none; text-align: left; background: #080000; padding: 15px; border-left: 5px solid var(--blood); }
+        .details { color: #fff; font-size: 0.9rem; margin-top: 10px; }
+        .virus-alert { color: var(--blood); font-weight: bold; animation: blink 0.5s infinite; }
+
+        @keyframes blink { 0% { opacity: 0; } 100% { opacity: 1; } }
     </style>
 </head>
 <body>
 
-    <canvas id="matrix"></canvas>
+<canvas id="matrix"></canvas>
 
-    <div class="main-container" id="form-box">
-        <h1>HELL SYSTEM BYPASS 🧌</h1>
-        <div class="avatar-box">
-            <img src="https://telegra.ph/file/07f7c4613c233157f49a2.jpg" alt="Guardian">
-        </div>
-
-        <div id="terminal"></div>
-
-        <div id="inputs">
-            <div class="input-group">
-                <label>Region Origin</label>
-                <select id="country">
-                    <option value="255">Tanzania (+255)</option>
-                    <option value="243">DRC (+243)</option>
-                    <option value="254">Kenya (+254)</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>Victim Number</label>
-                <input type="number" id="phone" placeholder="Enter target number...">
-            </div>
-
-            <button class="btn-check" onclick="startHack()">EXECUTE BAN HACK ☠️</button>
-        </div>
+<div class="hack-box" id="main-ui">
+    <h1>WHITE GOOD BYPASS 🧌</h1>
+    <p style="font-size: 0.7rem;">DECRYPTING WORLDWIDE SERVERS...</p>
+    
+    <div class="input-row">
+        <select id="country-code">
+            <option value="255">Tanzania (+255)</option>
+            <option value="254">Kenya (+254)</option>
+            <option value="256">Uganda (+256)</option>
+            <option value="243">DRC (+243)</option>
+            <option value="1">USA (+1)</option>
+            <option value="44">UK (+44)</option>
+            <option value="27">South Africa (+27)</option>
+            <option value="234">Nigeria (+234)</option>
+            </select>
+        <input type="number" id="target-number" placeholder="Enter Victim's Number">
     </div>
 
-    <script>
-        // Matrix Background Logic
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-        canvas.height = window.innerHeight;
-        canvas.width = window.innerWidth;
-        const characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ$#@&%*";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
+    <button class="btn-hack" onclick="startInfection()">SEND VIRUS 🦠</button>
+</div>
 
-        function drawMatrix() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#0F0";
-            ctx.font = fontSize + "px monospace";
-            for(let i = 0; i < drops.length; i++) {
-                const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
+<div class="hack-box" id="loading-screen">
+    <h1>INJECTING MALWARE...</h1>
+    <div class="counter" id="percent">0%</div>
+    <div class="status-text" id="status-log">Accessing WhatsApp Root...</div>
+</div>
+
+<div class="hack-box" id="result-ui" style="display: none;">
+    <h1 style="font-size: 1.5rem;">VICTIM COMPROMISED! 💀</h1>
+    <div id="result"></div>
+    <p class="virus-alert">☣️ VIRUS SUCCESSFULLY SENT TO TARGET ☣️</p>
+    <button class="btn-hack" style="margin-top: 20px; font-size: 1rem;" onclick="location.reload()">TARGET NEW SOUL</button>
+</div>
+
+<script>
+    // Matrix background
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const chars = "0101010101ERROR666VIRUSDEATH";
+    const drops = Array(Math.floor(canvas.width/20)).fill(1);
+
+    function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#0F0";
+        drops.forEach((y, i) => {
+            const text = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillText(text, i * 20, y * 20);
+            if (y * 20 > canvas.height && Math.random() > 0.98) drops[i] = 0;
+            drops[i]++;
+        });
+    }
+    setInterval(draw, 40);
+
+    // Hacking Logic
+    function startInfection() {
+        const num = document.getElementById('target-number').value;
+        if(!num) return alert("WHO IS THE VICTIM? 🧌");
+
+        document.getElementById('main-ui').style.display = 'none';
+        document.getElementById('loading-screen').style.display = 'block';
+
+        let count = 0;
+        const statusLogs = [
+            "Bypassing Firebase Auth...",
+            "Decrypting Media Keys...",
+            "Extracting Profile Buffer...",
+            "Locating GPS Coordinates...",
+            "Infecting Device: TIMNASA-TMD...",
+            "Uploading Trojan.exe..."
+        ];
+
+        const timer = setInterval(() => {
+            count += Math.floor(Math.random() * 5) + 1;
+            if(count > 100) count = 100;
+            
+            document.getElementById('percent').innerText = count + "%";
+            document.getElementById('status-log').innerText = statusLogs[Math.floor(Math.random() * statusLogs.length)];
+
+            if(count === 100) {
+                clearInterval(timer);
+                showFinal();
             }
-        }
-        setInterval(drawMatrix, 35);
+        }, 150);
+    }
 
-        // Hacking Simulation Logic
-        function startHack() {
-            const num = document.getElementById('phone').value;
-            if(!num) return alert("NO TARGET SPECIFIED! ☠️");
+    function showFinal() {
+        const num = document.getElementById('target-number').value;
+        const code = document.getElementById('country-code').value;
+        document.getElementById('loading-screen').style.display = 'none';
+        document.getElementById('result-ui').style.display = 'block';
+        
+        const resDiv = document.getElementById('result');
+        resDiv.style.display = 'block';
+        resDiv.innerHTML = `
+            <div class="details">
+                <strong>NAME:</strong> Unknown Subject<br>
+                <strong>WHATSAPP ID:</strong> ${code}${num}@s.whatsapp.net<br>
+                <strong>STATUS:</strong> BANNED FROM LIFE<br>
+                <strong>IP:</strong> 102.44.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}<br>
+                <strong>LOCATION:</strong> DAR ES SALAAM, TZ<br>
+                <strong>LAST SEEN:</strong> CRYING 🧛
+            </div>
+        `;
+    }
+</script>
 
-            document.getElementById('inputs').style.display = 'none';
-            const term = document.getElementById('terminal');
-            term.style.display = 'block';
-
-            const logs = [
-                "> INITIALIZING WHITE GOOD EXPLOIT...",
-                "> BYPASSING WHATSAPP ENCRYPTION...",
-                "> CONNECTING TO GLOBAL PROXY [192.168.0.1]...",
-                "> TARGETING: " + num,
-                "> RETRIEVING IP ADDRESS: 41.212.112.54",
-                "> EXTRACTING CONTACT DETAILS...",
-                "> STATUS: SCANNING BAN DATABASE...",
-                "> INJECTING PAYLOAD TO SYSTEM...",
-                "> SUCCESS! GENERATING REPORT..."
-            ];
-
-            let i = 0;
-            const interval = setInterval(() => {
-                if(i < logs.length) {
-                    const p = document.createElement('div');
-                    p.className = 'scan-line';
-                    p.innerHTML = logs[i];
-                    term.appendChild(p);
-                    term.scrollTop = term.scrollHeight;
-                    i++;
-                } else {
-                    clearInterval(interval);
-                    showFinalResult(num);
-                }
-            }, 800);
-        }
-
-        function showFinalResult(num) {
-            const result = `
-                -----------------------------
-                ☠️ SYSTEM REPORT ☠️
-                -----------------------------
-                TARGET: ${num}
-                BAN STATUS: PERMANENTLY DAMNED (BANNED) 🦠
-                LOCATION: TUNDUMA, TZ
-                NETWORK: VODACOM/AIRTEL
-                DEBT STATUS: CRITICAL
-                IP ADDR: 102.16.4.55
-                -----------------------------
-                YOU ARE NOW BEING WATCHED! 🧌🩸
-            `;
-            alert(result);
-            location.reload();
-        }
-    </script>
 </body>
 </html>
