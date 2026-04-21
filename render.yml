@@ -1,6 +1,0 @@
-services:
-  - type: static
-    name: hells-ban-registry
-    env: static
-    buildCommand: null
-    publishPath: ./
